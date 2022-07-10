@@ -8,7 +8,8 @@ type Game = {
 
 const games: Record<string, Game> = {}
 
-const wss = new WebSocketServer(8080);
+const port = parseInt(Deno.env.get('WEBSOCKET_PORT') || '8080')
+const wss = new WebSocketServer(port);
 wss.on("connection", function (ws: WebSocketClient) {
   const id = crypto.randomUUID()
   games[id] = { sequence: [], guess: [] }
