@@ -1,0 +1,75 @@
+<script src="https://unpkg.com/vue@3"></script>
+<style>
+.icons {
+    font-size: 32px;
+}
+.icons button {
+    font-size: 6rem;
+    border: none 0;
+    background: none;
+}
+.grid {
+    padding: 20px;
+    width: min-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+}
+.row {
+    white-space: nowrap;
+    width: 100%;
+    overflow: auto;
+    font-family: monospace;
+    padding: 15px;
+}
+</style>
+<div id="app">
+    <div v-if="id">
+        <button @click="start" v-if="!isPlaying">Start</button>
+        <div v-if="isPlaying">
+            <div v-if="next !== null" class="icons">
+                {{icons[next]}}
+
+                {{score}}
+                
+                {{message}}
+
+                <div class="grid">
+                    <button @click="send" value="0">{{icons[0]}}</button>
+                    <button @click="send" value="1">{{icons[1]}}</button>
+                    <button @click="send" value="2">{{icons[2]}}</button>
+                    <button @click="send" value="3">{{icons[3]}}</button>
+                </div>
+            </div>
+
+            <div v-if="next === null">
+                waiting for next signal
+
+                <button @click="getNext">retry</button>
+            </div>
+        </div>
+
+        <div v-if="isFail">
+            Game Over {{score}}
+
+            <div class="icons row">
+                <div>
+                    I: <span v-for="i in finalSequence">{{icons[i]}}</span>
+                </div>
+                <div>
+                    U: <span v-for="i in finalGuess">{{icons[i]}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-if="!id">
+        not connected...
+
+        <button @click="connect">Connect</button>
+    </div>
+</div>
+
+<script src="js/vue.js" type="module"></script>
+<script src="js/client.js" type="module"></script>
