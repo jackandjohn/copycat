@@ -14,27 +14,38 @@
     <div v-if="id">
         <div  v-if="!isPlaying" class="start">
             <button @click="start">Start</button>
-            <div class="center">Copy the cats. Get as long
+            <div class="center mt-3" v-if="!isFail">Copy the cats. Get as long
                 <br>as streak as possible
             </div>
         </div>
-        <div v-if="isPlaying">
+        <div v-if="isPlaying" class="game">
             <div v-if="next !== null" class="icons">
                 {{icons[next]}}
 
-                {{score}}
-                
-                <div class="message">
-                    {{message}}
+                <div class="small level">
+                    Level: {{level}}
                 </div>
 
-                <div>
-                    <div class="grid">
+                <div class="grid">
 
-                        <button @click="send" value="0">{{icons[0]}}</button>
-                        <button @click="send" value="1">{{icons[1]}}</button>
-                        <button @click="send" value="2">{{icons[2]}}</button>
-                        <button @click="send" value="3">{{icons[3]}}</button>
+                    <button @click="send" value="0">{{icons[0]}}</button>
+                    <button @click="send" value="1">{{icons[1]}}</button>
+                    <button @click="send" value="2">{{icons[2]}}</button>
+                    <button @click="send" value="3">{{icons[3]}}</button>
+                </div>
+                <div class="progress">
+                    <div class="results row">
+                        <div class="guesses">
+                            <span v-for="i in level" :key="i" class="guess">
+                                {{guessCount > 0 && guessCount >= i ? '✔️' : '_'}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="message">
+                    {{message}}
+                    <div class="small" v-if="!message">
+                        {{guessCount}}/{{level}}
                     </div>
                 </div>
             </div>
@@ -46,16 +57,23 @@
             </div>
         </div>
 
-        <div v-if="isFail">
-            Game Over {{score}}
+        <div v-if="isFail" class="center game-over">
+            <div class="big">
+                Game Over
+            </div>
+            
+            <div>Level: {{level}}</div>
 
-            <div class="icons row">
+            <div class="icons results row">
                 <div>
-                    I: <span v-for="i in finalSequence">{{icons[i]}}</span>
+                    <span v-for="i in finalSequence">{{icons[i]}}</span>
                 </div>
-                <div>
-                    U: <span v-for="i in finalGuess">{{icons[i]}}</span>
+                <div class="guesses">
+                    <span v-for="i in finalGuess" class="guess">{{icons[i]}}</span>
+                    <ins v-if="finalGuess.length > 1" class="correct">✔️</ins>
+                    <del class="incorrect">❌</del>
                 </div>
+
             </div>
         </div>
     </div>

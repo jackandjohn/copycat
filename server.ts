@@ -44,7 +44,7 @@ wss.on("connection", function (ws: WebSocketClient) {
       if(compare.length === games[id].sequence.length) {
         games[id].sequence.push(next)
         games[id].guess = []
-        ws.send(JSON.stringify({ event: "next", next, message: 'correct!', score: games[id].sequence.length - 1}))
+        ws.send(JSON.stringify({ event: "next", next, message: 'correct!', level: games[id].sequence.length}))
       }
     }
   });
