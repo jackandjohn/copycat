@@ -1,0 +1,51 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+#app {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+}
+.message {
+  font-size: 24px;
+  float: right;
+}
+.icons {
+  text-align: center;
+  font-size: 64px;
+}
+.icons button {
+  font-size: 1.5em;
+  border: none 0;
+  background: none;
+}
+.grid {
+  padding: 20px;
+  width: min-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+}
+.icons.row { font-size: 32px; text-align: left; }
+.row {
+  white-space: nowrap;
+  width: 100%;
+  overflow: auto;
+  font-family: monospace;
+  padding: 15px;
+}
+
+.start button {
+  font-size: 36px;
+  padding: 15px 30px;
+}
+.start, .center {
+  text-align: center;
+}
+
+.center {
+  padding: 3em 0;
+}

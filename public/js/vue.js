@@ -3,6 +3,9 @@ import { client } from './game.js'
 const { createApp } = Vue
 
 createApp({
+  mounted() {
+    this.connect()
+  },
   data() {
     return {
       icons: [

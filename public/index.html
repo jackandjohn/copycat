@@ -1,45 +1,41 @@
-<script src="https://unpkg.com/vue@3"></script>
-<style>
-.icons {
-    font-size: 32px;
-}
-.icons button {
-    font-size: 6rem;
-    border: none 0;
-    background: none;
-}
-.grid {
-    padding: 20px;
-    width: min-content;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 15px;
-    grid-row-gap: 15px;
-}
-.row {
-    white-space: nowrap;
-    width: 100%;
-    overflow: auto;
-    font-family: monospace;
-    padding: 15px;
-}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copycat</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+
 <div id="app">
     <div v-if="id">
-        <button @click="start" v-if="!isPlaying">Start</button>
+        <div  v-if="!isPlaying" class="start">
+            <button @click="start">Start</button>
+            <div class="center">Copy the cats. Get as long
+                <br>as streak as possible
+            </div>
+        </div>
         <div v-if="isPlaying">
             <div v-if="next !== null" class="icons">
                 {{icons[next]}}
 
                 {{score}}
                 
-                {{message}}
+                <div class="message">
+                    {{message}}
+                </div>
 
-                <div class="grid">
-                    <button @click="send" value="0">{{icons[0]}}</button>
-                    <button @click="send" value="1">{{icons[1]}}</button>
-                    <button @click="send" value="2">{{icons[2]}}</button>
-                    <button @click="send" value="3">{{icons[3]}}</button>
+                <div>
+                    <div class="grid">
+
+                        <button @click="send" value="0">{{icons[0]}}</button>
+                        <button @click="send" value="1">{{icons[1]}}</button>
+                        <button @click="send" value="2">{{icons[2]}}</button>
+                        <button @click="send" value="3">{{icons[3]}}</button>
+                    </div>
                 </div>
             </div>
 
@@ -73,3 +69,6 @@
 
 <script src="js/vue.js" type="module"></script>
 <script src="js/client.js" type="module"></script>
+
+</body>
+</html>
